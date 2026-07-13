@@ -1,6 +1,24 @@
 const gameController = (() => {
 
-    function createPlayer(number, mark) {
+    const gameboard = (() => {
+
+        const boardArray = [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', ''],
+        ];
+
+        const getBoardArray = () => boardArray;
+
+        const getCell = (row, column) => boardArray[row][column];
+
+        return {
+            getBoardArray,
+            getCell
+        };
+    })();
+
+    const createPlayer = (number, mark) => {
 
         const getNumber = () => number;
 
@@ -20,26 +38,8 @@ const gameController = (() => {
     const player1 = createPlayer(1, 'X');
     const player2 = createPlayer(2, 'O');
 
-    const gameboard = (() => {
-
-        const boardArray = [
-            ['', '', ''],
-            ['', '', ''],
-            ['', '', ''],
-        ];
-
-        const getBoardArray = () => boardArray;
-
-        const getCell = (row, column) => boardArray[row][column];
-
-        return {
-            getBoardArray,
-            getCell
-        };
-    })();
-
     const printBoard = () => {
-        for (let row of gameboard.getBoardArray()) {
+        for (const row of gameboard.getBoardArray()) {
             console.log(row);
         }
     };
@@ -48,18 +48,9 @@ const gameController = (() => {
 
     const getGameBoard = () => gameboard;
 
-    const debugTest = () => {
-        player1.placeMark(1, 1);
-        player2.placeMark(2, 1);
-        player1.placeMark(0, 1);
-        player2.placeMark(0, 0);
-
-        console.log(printBoard());
-    }
+    const debugTest = () => { }
 
     return {
-        getPlayers,
-        getGameBoard,
         debugTest
     }
 })();
