@@ -12,9 +12,12 @@ const gameController = (() => {
 
         const getCell = (row, column) => boardArray[row][column];
 
+        const cellIsEmpty = (row, column) => boardArray[row][column] === '';
+
         return {
             getBoardArray,
-            getCell
+            getCell,
+            cellIsEmpty
         };
     })();
 
@@ -44,11 +47,11 @@ const gameController = (() => {
         }
     };
 
-    const getPlayers = () => [player1, player2];
-
-    const getGameBoard = () => gameboard;
-
-    const debugTest = () => { }
+    const debugTest = () => {
+        console.log(gameboard.cellIsEmpty(1, 1));
+        player1.placeMark(1, 1);
+        console.log(gameboard.cellIsEmpty(1, 1));
+    }
 
     return {
         debugTest
