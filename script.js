@@ -107,7 +107,7 @@ const gameController = (() => {
             printBoard();
             const winner = gameboard.checkForWinner();
             if (winner !== "No winner found") {
-                console.log(`${winner} won the game!`);
+                console.log(`Player ${activePlayer.getNumber()} won the game!`);
                 return;
             }
         }
