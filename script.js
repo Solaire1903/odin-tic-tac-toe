@@ -1,29 +1,44 @@
-const gameboard = (() => {
+const gameController = (() => {
 
-    const board = [
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', ''],
-    ];
+    function createPlayer(number, mark) {
 
-    const getBoard = () => board;
+        const getNumber = () => number;
 
-    const getCell = (row, column) => board[row][column];
+        const getMark = () => mark;
 
-    return {
-        getBoard,
-        getCell
-    };
-})();
-
-function createPlayer(number, mark) {
-
-    const getNumber = () => number;
-
-    const getMark = () => mark;
-
-    return {
-        getNumber,
-        getMark
+        return {
+            getNumber,
+            getMark
+        }
     }
-}
+
+    const player1 = createPlayer(1, 'X');
+    const player2 = createPlayer(2, 'O');
+
+    const gameboard = (() => {
+
+        const boardArray = [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', ''],
+        ];
+
+        const getBoard = () => boardArray;
+
+        const getCell = (row, column) => boardArray[row][column];
+
+        return {
+            getBoard,
+            getCell
+        };
+    })();
+
+    const getPlayers = () => [player1, player2];
+
+    const getGameBoard = () => gameboard;
+
+    return {
+        getPlayers,
+        getGameBoard
+    }
+})();
