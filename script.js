@@ -14,5 +14,16 @@ const gameboard = (() => {
         getBoard,
         getCell
     };
-
 })();
+
+function createPlayer(number, mark) {
+
+    const getNumber = () => number;
+
+    const getMark = () => mark;
+
+    return {
+        getNumber,
+        getMark
+    }
+}
