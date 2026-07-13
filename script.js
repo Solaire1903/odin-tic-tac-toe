@@ -6,9 +6,14 @@ const gameController = (() => {
 
         const getMark = () => mark;
 
+        const placeMark = (row, column) => {
+            gameboard.getBoardArray()[row][column] = mark;
+        };
+
         return {
             getNumber,
-            getMark
+            getMark,
+            placeMark
         }
     }
 
@@ -43,8 +48,20 @@ const gameController = (() => {
 
     const getGameBoard = () => gameboard;
 
+    const debugTest = () => {
+        player1.placeMark(1, 1);
+        player2.placeMark(2, 1);
+        player1.placeMark(0, 1);
+        player2.placeMark(0, 0);
+
+        console.log(printBoard());
+    }
+
     return {
         getPlayers,
-        getGameBoard
+        getGameBoard,
+        debugTest
     }
 })();
+
+gameController.debugTest();
