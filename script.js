@@ -91,17 +91,33 @@ const gameController = (() => {
         }
     };
 
-    const debugTest = () => {
-        player2.placeMark(0, 0);
-        player2.placeMark(1, 1);
-        player2.placeMark(2, 2);
-        printBoard();
-        console.log(gameboard.checkForWinner());
+    const playGame = () => {
+        let activePlayer;
+
+        for (let turn = 0; turn < 9; ++turn) {
+            if (turn % 2 === 0) {
+                activePlayer = player1;
+            }
+            else {
+                activePlayer = player2;
+            }
+
+            console.log(`Player ${activePlayer.getNumber()} turn`);
+            activePlayer.placeMark(1, 1);
+            printBoard();
+            const winner = gameboard.checkForWinner();
+            if (winner !== "No winner found") {
+                console.log(`${winner} won the game!`);
+                return;
+            }
+        }
+
+        console.log("It's a tie!");
     }
 
     return {
-        debugTest
+        playGame
     }
 })();
 
-gameController.debugTest();
+gameController.playGame();
