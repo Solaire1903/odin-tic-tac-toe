@@ -23,12 +23,12 @@ const gameController = (() => {
             ['', '', ''],
         ];
 
-        const getBoard = () => boardArray;
+        const getBoardArray = () => boardArray;
 
         const getCell = (row, column) => boardArray[row][column];
 
         return {
-            getBoard,
+            getBoardArray,
             getCell
         };
     })();
