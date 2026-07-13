@@ -33,6 +33,12 @@ const gameController = (() => {
         };
     })();
 
+    const printBoard = () => {
+        for (let row of gameboard.getBoardArray()) {
+            console.log(row);
+        }
+    };
+
     const getPlayers = () => [player1, player2];
 
     const getGameBoard = () => gameboard;
