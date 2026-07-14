@@ -11,7 +11,7 @@ body {
   place-content: center;
 }
 
-.display-area {
+.game-grid {
   height: 600px;
   width: 600px;
   border: 15px solid white;

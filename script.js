@@ -95,48 +95,27 @@ const displayController = (() => {
 
         const getGameboard = () => gameboard;
 
-        const playGame = () => {
+        const playTurn = (playerNumber, row, col) => {
             let activePlayer;
 
-            for (let turn = 0; turn < 9; ++turn) {
-                if (turn % 2 === 0) {
-                    activePlayer = player1;
-                }
-                else {
-                    activePlayer = player2;
-                }
+            if (playerNumber === 1)
+                activePlayer = player1;
+            else
+                activePlayer = player2;
 
-                console.log(`Player ${activePlayer.getNumber()} turn`);
-                player1.placeMark(0, 0);
-                player2.placeMark(0, 1);
-                player1.placeMark(0, 2);
-                player2.placeMark(1, 0);
-                player1.placeMark(1, 1);
-                player2.placeMark(1, 2);
-                player1.placeMark(2, 0);
-                player2.placeMark(2, 1);
-                player1.placeMark(2, 2);
-                printBoard();
-                const winner = gameboard.checkForWinner();
-                if (winner !== "No winner found") {
-                    console.log(`Player ${activePlayer.getNumber()} won the game!`);
-                    return;
-                }
-            }
-
-            console.log("It's a tie!");
+            activePlayer.placeMark(row, col);
         }
 
         return {
             getGameboard,
-            playGame
+            playTurn
         }
     })();
 
-    const renderBoard = () => {
+    const updateBoard = () => {
         const boardArray = gameController.getGameboard().getBoardArray();
         const gameCellList = document.querySelectorAll(".game-cell");
-        
+
         let arrayIndex = 0;
         for (const gameCell of gameCellList) {
             const row = Math.floor(arrayIndex / 3);
@@ -153,9 +132,40 @@ const displayController = (() => {
         }
     }
 
+    let listenerAdded = false;
+
+    const setUpGame = () => {
+        const gameGrid = document.querySelector(".game-grid");
+        let activePlayerNumber = 1;
+
+        if (!listenerAdded) {
+            gameGrid.addEventListener("click", (e) => {
+                const clickedCell = e.target;
+
+                if (clickedCell === gameGrid)
+                    return;
+
+                const row = clickedCell.dataset.row;
+                const col = clickedCell.dataset.col;
+
+                if (!gameController.getGameboard().cellIsEmpty(row, col))
+                    return;
+
+                gameController.playTurn(activePlayerNumber, row, col);
+
+                if (activePlayerNumber === 1)
+                    activePlayerNumber = 2;
+                else
+                    activePlayerNumber = 1;
+
+                updateBoard();
+            });
+            listenerAdded = true;
+        }
+    }
+
     const debugTest = () => {
-        gameController.playGame();
-        renderBoard();
+        setUpGame();
     }
 
     return {
