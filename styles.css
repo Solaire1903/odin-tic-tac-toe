@@ -26,4 +26,5 @@ body {
 .gameCell {
   background-color: white;
   border: none;
+  cursor: pointer;
 }
