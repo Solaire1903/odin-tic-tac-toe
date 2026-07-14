@@ -12,9 +12,9 @@ const displayController = (() => {
 
             const getBoardArray = () => boardArray;
 
-            const getCell = (row, column) => boardArray[row][column];
+            const getCell = (row, col) => boardArray[row][col];
 
-            const cellIsEmpty = (row, column) => boardArray[row][column] === '';
+            const cellIsEmpty = (row, col) => boardArray[row][col] === '';
 
             const checkForWinner = () => {
                 let winner;
@@ -73,8 +73,8 @@ const displayController = (() => {
 
             const getMark = () => mark;
 
-            const placeMark = (row, column) => {
-                gameboard.getBoardArray()[row][column] = mark;
+            const placeMark = (row, col) => {
+                gameboard.getBoardArray()[row][col] = mark;
             };
 
             return {
@@ -93,6 +93,8 @@ const displayController = (() => {
             }
         };
 
+        const getGameboard = () => gameboard;
+
         const playGame = () => {
             let activePlayer;
 
@@ -105,7 +107,15 @@ const displayController = (() => {
                 }
 
                 console.log(`Player ${activePlayer.getNumber()} turn`);
-                activePlayer.placeMark(1, 1);
+                player1.placeMark(0, 0);
+                player2.placeMark(0, 1);
+                player1.placeMark(0, 2);
+                player2.placeMark(1, 0);
+                player1.placeMark(1, 1);
+                player2.placeMark(1, 2);
+                player1.placeMark(2, 0);
+                player2.placeMark(2, 1);
+                player1.placeMark(2, 2);
                 printBoard();
                 const winner = gameboard.checkForWinner();
                 if (winner !== "No winner found") {
@@ -118,7 +128,39 @@ const displayController = (() => {
         }
 
         return {
+            getGameboard,
             playGame
         }
     })();
+
+    const renderBoard = () => {
+        const boardArray = gameController.getGameboard().getBoardArray();
+        const gameCellList = document.querySelectorAll(".game-cell");
+        
+        let arrayIndex = 0;
+        for (const gameCell of gameCellList) {
+            const row = Math.floor(arrayIndex / 3);
+            const col = arrayIndex % 3;
+            const boardContent = boardArray[row][col];
+
+            if (boardContent === 'X') gameCell.style.color = "#2309a3";
+            else if (boardContent === 'O') gameCell.style.color = "#d51010";
+
+            gameCell.textContent = boardContent;
+
+            ++arrayIndex;
+
+        }
+    }
+
+    const debugTest = () => {
+        gameController.playGame();
+        renderBoard();
+    }
+
+    return {
+        debugTest
+    }
 })();
+
+displayController.debugTest()
