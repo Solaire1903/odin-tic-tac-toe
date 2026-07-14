@@ -6,4 +6,24 @@
 
 body {
   min-height: 100vh;
+
+  display: grid;
+  place-content: center;
+}
+
+.displayArea {
+  height: 600px;
+  width: 600px;
+  border: 15px solid white;
+  background-color: black;
+
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.gameCell {
+  background-color: white;
+  border: none;
 }
