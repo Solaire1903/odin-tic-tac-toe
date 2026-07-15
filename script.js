@@ -59,11 +59,16 @@ const displayController = (() => {
                 return "No winner found";
             };
 
+            const resetBoard = () => {
+                boardArray.forEach((row, rIndex) => row.forEach((cell, index) => boardArray[rIndex][index] = ''));
+            }
+
             return {
                 getBoardArray,
                 getCell,
                 cellIsEmpty,
-                checkForWinner
+                checkForWinner,
+                resetBoard
             };
         })();
 
@@ -138,16 +143,14 @@ const displayController = (() => {
 
     const removeClickableGrid = () => {
         gameGrid.removeEventListener("click", playTurn);
-        const gameCells = document.querySelectorAll(".game-cell");
-        gameCells.forEach((cell) => cell.style.cursor = "default");
     }
 
     let player1Name;
     let player2Name;
 
-    let activePlayerNumber = 1;
-    let activePlayerName = player1Name;
-    let turn = 0;
+    let activePlayerNumber;
+    let activePlayerName;
+    let turn;
     const gameNotification = document.querySelector(".game-notification");
 
     const playTurn = (event) => {
@@ -175,7 +178,7 @@ const displayController = (() => {
         }
         else if (turn >= 9) {
             results.showModal();
-            results.firstChild.textContent = "It's a tie";
+            results.firstChild.textContent = "It's a tie!";
             removeClickableGrid();
             return;
         }
@@ -198,15 +201,32 @@ const displayController = (() => {
     const registerPlayerNames = (event) => {
         event.preventDefault();
 
-        player1Name = document.getElementById("player-one-name").value;
-        player2Name = document.getElementById("player-two-name").value;
+        const player1Input = document.getElementById("player-one-name");
+        const player2Input = document.getElementById("player-two-name");
+
+        player1Name = player1Input.value;
+        player2Name = player2Input.value;
+
+        player1Input.value = '';
+        player2Input.value = '';
 
         gameNotification.textContent = `Player 1 (${player1Name}) turn`;
 
         nameForm.close();
     }
 
+    const newGameButton = document.querySelector(".new-game-button");
+
     const startNewGame = () => {
+
+        activePlayerNumber = 1;
+        activePlayerName = player1Name;
+        turn = 0;
+
+        gameController.getGameboard().resetBoard();
+        updateBoard();
+
+        results.close();
 
         nameForm.showModal();
 
@@ -214,6 +234,8 @@ const displayController = (() => {
         form.addEventListener("submit", registerPlayerNames);
 
         gameGrid.addEventListener("click", playTurn);
+
+        newGameButton.addEventListener("click", startNewGame);
     }
 
     const debugTest = () => {
