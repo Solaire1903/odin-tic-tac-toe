@@ -177,14 +177,28 @@ const displayController = (() => {
         updateBoard();
     }
 
-    let listenerAdded = false;
+    let player1Name;
+    let player2Name;
+
+    const dialog = document.querySelector("dialog");
+
+    const registerPlayerNames = (event) => {
+        event.preventDefault();
+
+        player1Name = document.getElementById("player-one-name").value;
+        player2Name = document.getElementById("player-two-name").value;
+
+        dialog.close();
+    }
 
     const setUpGame = () => {
 
-        if (!listenerAdded) {
-            gameGrid.addEventListener("click", playTurn);
-            listenerAdded = true;
-        }
+        dialog.showModal();
+
+        const form = document.querySelector("form");
+        form.addEventListener("submit", registerPlayerNames);
+
+        gameGrid.addEventListener("click", playTurn);
     }
 
     const debugTest = () => {
