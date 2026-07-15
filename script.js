@@ -133,33 +133,35 @@ const displayController = (() => {
     }
 
     let listenerAdded = false;
+    const gameGrid = document.querySelector(".game-grid");
+    let activePlayerNumber = 1;
+
+    const playTurn = (event) => {
+        const clickedCell = event.target;
+
+        if (clickedCell === gameGrid)
+            return;
+
+        const row = clickedCell.dataset.row;
+        const col = clickedCell.dataset.col;
+
+        if (!gameController.getGameboard().cellIsEmpty(row, col))
+            return;
+
+        gameController.playTurn(activePlayerNumber, row, col);
+
+        if (activePlayerNumber === 1)
+            activePlayerNumber = 2;
+        else
+            activePlayerNumber = 1;
+
+        updateBoard();
+    }
 
     const setUpGame = () => {
-        const gameGrid = document.querySelector(".game-grid");
-        let activePlayerNumber = 1;
 
         if (!listenerAdded) {
-            gameGrid.addEventListener("click", (e) => {
-                const clickedCell = e.target;
-
-                if (clickedCell === gameGrid)
-                    return;
-
-                const row = clickedCell.dataset.row;
-                const col = clickedCell.dataset.col;
-
-                if (!gameController.getGameboard().cellIsEmpty(row, col))
-                    return;
-
-                gameController.playTurn(activePlayerNumber, row, col);
-
-                if (activePlayerNumber === 1)
-                    activePlayerNumber = 2;
-                else
-                    activePlayerNumber = 1;
-
-                updateBoard();
-            });
+            gameGrid.addEventListener("click", playTurn);
             listenerAdded = true;
         }
     }
