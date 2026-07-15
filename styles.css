@@ -11,6 +11,10 @@ body {
   place-content: center;
 }
 
+button {
+  cursor: pointer;
+}
+
 .game-grid {
   height: 600px;
   width: 600px;
@@ -28,5 +32,4 @@ body {
   border: none;
   font-size: 4em;
   font-weight: bold;
-  cursor: pointer;
 }

@@ -168,12 +168,14 @@ const displayController = (() => {
         updateBoard();
 
         if (winner !== "No winner found") {
-            gameNotification.textContent = `Player ${activePlayerNumber} (${activePlayerName}) wins!`;
+            results.showModal();
+            results.firstChild.textContent = `Player ${activePlayerNumber} (${activePlayerName}) wins!`;
             removeClickableGrid();
             return;
         }
         else if (turn >= 9) {
-            gameNotification.textContent = "It's a tie!";
+            results.showModal();
+            results.firstChild.textContent = "It's a tie";
             removeClickableGrid();
             return;
         }
@@ -190,7 +192,8 @@ const displayController = (() => {
         gameNotification.textContent = `Player ${activePlayerNumber} (${activePlayerName}) turn`;
     }
 
-    const dialog = document.querySelector("dialog");
+    const nameForm = document.querySelector(".name-form");
+    const results = document.querySelector(".results");
 
     const registerPlayerNames = (event) => {
         event.preventDefault();
@@ -200,12 +203,12 @@ const displayController = (() => {
 
         gameNotification.textContent = `Player 1 (${player1Name}) turn`;
 
-        dialog.close();
+        nameForm.close();
     }
 
-    const setUpGame = () => {
+    const startNewGame = () => {
 
-        dialog.showModal();
+        nameForm.showModal();
 
         const form = document.querySelector("form");
         form.addEventListener("submit", registerPlayerNames);
@@ -214,7 +217,7 @@ const displayController = (() => {
     }
 
     const debugTest = () => {
-        setUpGame();
+        startNewGame();
     }
 
     return {
