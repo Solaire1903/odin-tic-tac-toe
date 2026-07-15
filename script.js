@@ -104,6 +104,8 @@ const displayController = (() => {
                 activePlayer = player2;
 
             activePlayer.placeMark(row, col);
+
+            return gameboard.checkForWinner();
         }
 
         return {
@@ -148,7 +150,12 @@ const displayController = (() => {
         if (!gameController.getGameboard().cellIsEmpty(row, col))
             return;
 
-        gameController.playTurn(activePlayerNumber, row, col);
+        const winner = gameController.playTurn(activePlayerNumber, row, col);
+
+        if (winner !== "No winner found") {
+            console.log(`Player ${activePlayerNumber} wins!`)
+            gameGrid.removeEventListener("click", playTurn);
+        }
 
         if (activePlayerNumber === 1)
             activePlayerNumber = 2;
