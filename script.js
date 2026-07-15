@@ -137,6 +137,7 @@ const displayController = (() => {
     let listenerAdded = false;
     const gameGrid = document.querySelector(".game-grid");
     let activePlayerNumber = 1;
+    let turn = 0;
 
     const playTurn = (event) => {
         const clickedCell = event.target;
@@ -151,9 +152,14 @@ const displayController = (() => {
             return;
 
         const winner = gameController.playTurn(activePlayerNumber, row, col);
+        ++turn;
 
         if (winner !== "No winner found") {
             console.log(`Player ${activePlayerNumber} wins!`)
+            gameGrid.removeEventListener("click", playTurn);
+        }
+        else if (turn >= 9) {
+            console.log("It's a tie!");
             gameGrid.removeEventListener("click", playTurn);
         }
 
