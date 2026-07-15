@@ -60,7 +60,7 @@ const displayController = (() => {
             };
 
             const resetBoard = () => {
-                boardArray.forEach((row, rIndex) => row.forEach((cell, index) => boardArray[rIndex][index] = ''));
+                boardArray.forEach((row, rowIndex) => row.forEach((cell, colIndex) => boardArray[rowIndex][colIndex] = ''));
             }
 
             return {
@@ -174,12 +174,14 @@ const displayController = (() => {
             results.showModal();
             results.firstChild.textContent = `Player ${activePlayerNumber} (${activePlayerName}) wins!`;
             removeClickableGrid();
+            gameNotification.textContent = '';
             return;
         }
         else if (turn >= 9) {
             results.showModal();
             results.firstChild.textContent = "It's a tie!";
             removeClickableGrid();
+            gameNotification.textContent = '';
             return;
         }
 
