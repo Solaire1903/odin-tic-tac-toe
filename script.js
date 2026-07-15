@@ -142,8 +142,13 @@ const displayController = (() => {
         gameCells.forEach((cell) => cell.style.cursor = "default");
     }
 
+    let player1Name;
+    let player2Name;
+
     let activePlayerNumber = 1;
+    let activePlayerName = player1Name;
     let turn = 0;
+    const gameNotification = document.querySelector(".game-notification");
 
     const playTurn = (event) => {
         const clickedCell = event.target;
@@ -160,25 +165,30 @@ const displayController = (() => {
         const winner = gameController.playTurn(activePlayerNumber, row, col);
         ++turn;
 
+        updateBoard();
+
         if (winner !== "No winner found") {
-            console.log(`Player ${activePlayerNumber} wins!`)
+            gameNotification.textContent = `Player ${activePlayerNumber} (${activePlayerName}) wins!`;
             removeClickableGrid();
+            return;
         }
         else if (turn >= 9) {
-            console.log("It's a tie!");
+            gameNotification.textContent = "It's a tie!";
             removeClickableGrid();
+            return;
         }
 
-        if (activePlayerNumber === 1)
+        if (activePlayerNumber === 1) {
             activePlayerNumber = 2;
-        else
+            activePlayerName = player2Name;
+        }
+        else {
             activePlayerNumber = 1;
+            activePlayerName = player1Name;
+        }
 
-        updateBoard();
+        gameNotification.textContent = `Player ${activePlayerNumber} (${activePlayerName}) turn`;
     }
-
-    let player1Name;
-    let player2Name;
 
     const dialog = document.querySelector("dialog");
 
@@ -187,6 +197,8 @@ const displayController = (() => {
 
         player1Name = document.getElementById("player-one-name").value;
         player2Name = document.getElementById("player-two-name").value;
+
+        gameNotification.textContent = `Player 1 (${player1Name}) turn`;
 
         dialog.close();
     }
