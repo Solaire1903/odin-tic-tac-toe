@@ -61,6 +61,19 @@ input {
   justify-self: center;
 }
 
+.game-area {
+  display: grid;
+  grid-template-rows: 1fr 10fr;
+  gap: 20px;
+}
+
+.game-notification {
+  font-size: 2em;
+  font-weight: bold;
+
+  justify-self: center;
+}
+
 .game-grid {
   height: 600px;
   width: 600px;
