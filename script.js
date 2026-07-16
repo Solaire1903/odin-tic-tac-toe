@@ -27,8 +27,6 @@ const displayController = (() => {
 
             const getBoardArray = () => boardArray;
 
-            const getCell = (row, col) => boardArray[row][col];
-
             const cellIsEmpty = (row, col) => boardArray[row][col] === '';
 
             const checkForWinner = () => {
@@ -80,7 +78,6 @@ const displayController = (() => {
 
             return {
                 getBoardArray,
-                getCell,
                 cellIsEmpty,
                 checkForWinner,
                 resetBoard
