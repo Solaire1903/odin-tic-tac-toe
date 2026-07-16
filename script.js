@@ -236,4 +236,4 @@ const displayController = (() => {
     }
 })();
 
-displayController.startNewGame()
+displayController.startNewGame();
