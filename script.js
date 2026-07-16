@@ -87,25 +87,19 @@ const displayController = (() => {
             };
         })();
 
-        const createPlayer = (number, mark) => {
-
-            const getNumber = () => number;
-
-            const getMark = () => mark;
+        const createPlayer = (mark) => {
 
             const placeMark = (row, col) => {
                 gameboard.getBoardArray()[row][col] = mark;
             };
 
             return {
-                getNumber,
-                getMark,
                 placeMark
             }
         }
 
-        const player1 = createPlayer(1, 'X');
-        const player2 = createPlayer(2, 'O');
+        const player1 = createPlayer('X');
+        const player2 = createPlayer('O');
 
         const printBoard = () => {
             for (const row of gameboard.getBoardArray()) {
