@@ -15,6 +15,52 @@ button {
   cursor: pointer;
 }
 
+dialog::backdrop {
+  background-color: black;
+  opacity: 30%;
+}
+
+.name-form {
+  margin: auto;
+  padding: 20px;
+  font-size: 1.4em;
+}
+
+.name-form>div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.name-form>div>p {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+form {
+  display: grid;
+  grid-template-rows: repeat(5 1fr);
+  gap: 10px;
+}
+
+input {
+  height: 40px;
+  width: 400px;
+  padding: 5px;
+  font-size: 1.2em;
+}
+
+.start-game-button {
+  height: 70px;
+  width: 180px;
+  font-size: 1.2em;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+
+  justify-self: center;
+}
+
 .game-grid {
   height: 600px;
   width: 600px;
