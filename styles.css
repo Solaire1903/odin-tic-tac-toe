@@ -33,8 +33,9 @@ dialog::backdrop {
 }
 
 .name-form>div>p {
+  margin-bottom: 20px;
   font-weight: bold;
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
 
 form {
@@ -43,11 +44,15 @@ form {
   gap: 10px;
 }
 
+label {
+  font-size: 1.3em;
+}
+
 input {
   height: 40px;
   width: 400px;
   padding: 5px;
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 .start-game-button {
