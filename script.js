@@ -1,5 +1,20 @@
 const displayController = (() => {
 
+    let player1Name;
+    let player2Name;
+
+    let activePlayerNumber;
+    let activePlayerName;
+
+    let turn;
+
+    const nameForm = document.querySelector(".name-form");
+    const gameNotification = document.querySelector(".game-notification");
+    const gameGrid = document.querySelector(".game-grid");
+    const results = document.querySelector(".results");
+    const resultText = document.querySelector(".result-text");
+    const newGameButton = document.querySelector(".new-game-button");
+    
     const gameController = (() => {
 
         const gameboard = (() => {
@@ -139,19 +154,9 @@ const displayController = (() => {
         }
     }
 
-    const gameGrid = document.querySelector(".game-grid");
-
     const removeClickableGrid = () => {
         gameGrid.removeEventListener("click", playTurn);
     }
-
-    let player1Name;
-    let player2Name;
-
-    let activePlayerNumber;
-    let activePlayerName;
-    let turn;
-    const gameNotification = document.querySelector(".game-notification");
 
     const playTurn = (event) => {
         const clickedCell = event.target;
@@ -197,10 +202,6 @@ const displayController = (() => {
         gameNotification.textContent = `Player ${activePlayerNumber} (${activePlayerName}) turn`;
     }
 
-    const nameForm = document.querySelector(".name-form");
-    const results = document.querySelector(".results");
-    const resultText = document.querySelector(".result-text");
-
     const registerPlayerNames = (event) => {
         event.preventDefault();
 
@@ -217,8 +218,6 @@ const displayController = (() => {
 
         nameForm.close();
     }
-
-    const newGameButton = document.querySelector(".new-game-button");
 
     const startNewGame = () => {
 
@@ -241,13 +240,9 @@ const displayController = (() => {
         newGameButton.addEventListener("click", startNewGame);
     }
 
-    const debugTest = () => {
-        startNewGame();
-    }
-
     return {
-        debugTest
+        startNewGame
     }
 })();
 
-displayController.debugTest()
+displayController.startNewGame()
