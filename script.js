@@ -172,14 +172,14 @@ const displayController = (() => {
 
         if (winner !== "No winner found") {
             results.showModal();
-            results.firstChild.textContent = `Player ${activePlayerNumber} (${activePlayerName}) wins!`;
+            resultText.textContent = `Player ${activePlayerNumber} (${activePlayerName}) wins!`;
             removeClickableGrid();
             gameNotification.textContent = '';
             return;
         }
         else if (turn >= 9) {
             results.showModal();
-            results.firstChild.textContent = "It's a tie!";
+            resultText.textContent = "It's a tie!";
             removeClickableGrid();
             gameNotification.textContent = '';
             return;
@@ -199,6 +199,7 @@ const displayController = (() => {
 
     const nameForm = document.querySelector(".name-form");
     const results = document.querySelector(".results");
+    const resultText = document.querySelector(".result-text");
 
     const registerPlayerNames = (event) => {
         event.preventDefault();

@@ -20,22 +20,29 @@ dialog::backdrop {
   opacity: 30%;
 }
 
-.name-form {
+.name-form,
+.results {
   margin: auto;
   padding: 20px;
   font-size: 1.4em;
 }
 
-.name-form>div {
+.name-form>div,
+.results>div {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.name-form>div>p {
+.name-form>div>p,
+.result-text {
   margin-bottom: 20px;
   font-weight: bold;
   font-size: 1.5em;
+}
+
+.result-text {
+  place-self: center;
 }
 
 form {
@@ -55,7 +62,8 @@ input {
   font-size: 1.1em;
 }
 
-.start-game-button {
+.start-game-button,
+.new-game-button {
   height: 70px;
   width: 180px;
   font-size: 1.2em;
@@ -63,7 +71,7 @@ input {
   border: none;
   border-radius: 10px;
 
-  justify-self: center;
+  place-self: center;
 }
 
 .game-area {
@@ -94,6 +102,6 @@ input {
 .game-cell {
   background-color: white;
   border: none;
-  font-size: 4em;
+  font-size: 5em;
   font-weight: bold;
 }
